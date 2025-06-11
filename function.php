@@ -114,6 +114,8 @@ function login()
     // var_dump($nama, $input_pass);
     $query = mysqli_query($koneksi, "SELECT * FROM user where nama = '$nama'");
     $data = mysqli_fetch_assoc($query);
+    // echo json_encode($data);
+    // die;
 
     $password = $data['password'];
     $role = $data['role'];
@@ -124,14 +126,14 @@ function login()
             if ($role == "1") {
                 $_SESSION['role'] = 1;
                 echo "<script>
-                document.location.href = 'test.php';
+                document.location.href = 'admin/index.php?page=data-user';
                 </script>";
-            } elseif ($role == "0") {
+            } else if ($role == "0") {
                 $_SESSION['role'] = 0;
                 echo "<script>
                 document.location.href = 'admin/index.php?page=data-user';
                 </script>";
-            } elseif ($role == "2") {
+            } else if ($role == "2") {
                 $_SESSION['role'] = 2;
                 echo "<script>
                 document.location.href = 'admin/index.php?page=data-user';
