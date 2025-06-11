@@ -1,0 +1,315 @@
+@media screen and (max-width: 699px) {
+    .header {
+        height: 70px;
+        transition: all 0.5s;
+        z-index: 997;
+        padding: 20px 0;
+        /* box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+        background: #fff; */
+    }
+    .header img {
+        width: 70%;
+    }
+    .landing {
+        height: auto;
+    }
+    .landing .container,
+    #landing .container-fluid {
+        padding-top: 0px;
+    }
+    .landing h1 {
+        font-size: 20px;
+        line-height: 36px;
+        text-align: center;
+    }
+    .landing p {
+        font-size: 12px;
+    }
+    .landing h2 {
+        font-size: 18px;
+        line-height: 36px;
+    }
+    .landing .hero-img img {
+        margin-top: 10px;
+        margin-right: 20px;
+        padding-top: 0px;
+        width: 80%;
+    }
+    .landing .btn-get-started {
+        margin-top: 30px;
+        line-height: 0;
+        padding: 20px 30px;
+        border-radius: 10px;
+        transition: 0.5s;
+        color: #fff;
+        background: #168581;
+        /* background-image: linear-gradient(to right, #186147 0%, #558F5C); */
+        box-shadow: 0px 0px 30px #186147
+    }
+    .landing .btn-get-started span {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+    .landing .btn-get-started i {
+        margin-left: 5px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+    /* control navbar mobile */
+    .header #MobileNavigation {
+        display: block;
+    }
+    .navbar-mobileB {
+        border-radius: 20px 20px 0px 0px;
+        position: fixed;
+        bottom: 0;
+        text-align: center;
+        background-color: white;
+        width: 100%;
+        height: 10%;
+        z-index: 4;
+        padding-top: 1%;
+        display: block;
+        box-shadow: 0px 2px 20px rgb(1 41 112 / 10%);
+        padding: 12px 0;
+    }
+    .navbar-mobileB .navbar-header-mobileB {
+        display: flex;
+        overflow-y: auto;
+        flex-wrap: nowrap;
+        justify-content: space-evenly;
+    }
+    .navbar-mobileB .navbar-header-mobileB a {
+        color: #1E7C5B;
+    }
+    .navbar-mobileB .navbar-header-mobileB i {
+        font-weight: 500;
+    }
+    .navbar-mobileB .navbar-header-mobileB .text {
+        font-size: 12px;
+        color: #869294;
+    }
+    .back-to-top {
+        bottom: 75px;
+    }
+    /* Tentang */
+    .tentang .content {
+        padding: 5px;
+    }
+    .tentang .info {
+        margin-top: 20px;
+        padding: 5px;
+        font-size: 12px;
+    }
+    .tentang h3 {
+        font-size: 12px;
+        text-align: center;
+        font-weight: 700;
+        color: #186147;
+    }
+    .tentang h2 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #3B3B3B;
+        text-align: center;
+    }
+    .tentang p {
+        font-size: 12px;
+        margin: 15px 0 30px 0;
+        line-height: 20px;
+        color: #979797;
+    }
+    /* penduduk */
+    .penduduk {
+        padding: 10px;
+        background: white url(../image/element/element1.svg) no-repeat left top;
+        background-position: 50px 60px;
+    }
+    .penduduk h3 {
+        font-size: 14px;
+        font-weight: 800;
+        color: #186147
+    }
+    .penduduk h2 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #3B3B3B;
+    }
+    .penduduk p {
+        margin: 15px 0 30px 0;
+        line-height: 24px;
+        text-align: justify;
+        text-justify: inter-word;
+        font-size: 12px;
+    }
+    .penduduk .card-total p {
+        text-align: center;
+        font-size: 10px;
+        margin: 0px
+    }
+    .penduduk img {
+        position: relative;
+        max-width: 500px;
+        align-items: center;
+    }
+    /* organisasi */
+    .organisasi {
+        /* background: url(../image/element/element2.svg) top right no-repeat; */
+        background-size: cover;
+        background-size: 700px 700px;
+        padding: 10px;
+        z-index: auto;
+        /* width: 100%;
+        height: 100vh; */
+    }
+    .organisasi .photo {
+        align-items: center;
+        padding-bottom: 10px;
+    }
+    .organisasi .boxdanplek {
+        background: #F8FCFF;
+        width: 300px;
+        height: 300px;
+        border-radius: 15px;
+        line-height: 60px;
+        margin: auto;
+    }
+    .organisasi h3 {
+        font-size: 14px;
+        text-align: center;
+    }
+    .organisasi h2 {
+        font-size: 18px;
+        text-align: center;
+    }
+    .organisasi p {
+        font-size: 10px;
+    }
+    .organisasi blockquote {
+        position: relative;
+        margin-bottom: 0;
+        padding-left: 30px;
+        border-left: 1px solid #dadada;
+        color: #677eb4;
+        margin-left: 70px
+    }
+    .organisasi blockquote::before {
+        position: absolute;
+        content: "\f10d";
+        font-family: "fontawesome";
+        /* font-family: Font Awesome 5 Free; */
+        left: -47px;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        color: #186147;
+        font-size: 2.14286em
+    }
+    .organisasi blockquote span {
+        color: #18bfc3
+    }
+    /* fasilitas */
+    .fasilitas h3 {
+        font-size: 14px;
+    }
+    .fasilitas h2 {
+        font-size: 18px;
+    }
+    .fasilitas #fasilitas-flters {
+        margin: 0 auto 25px auto;
+        list-style: none;
+        text-align: center;
+        padding: 2px 15px;
+    }
+    .fasilitas .section-header h3 {
+        font-size: 14px;
+        text-align: center;
+    }
+    .fasilitas .section-header h2 {
+        font-size: 18px;
+        text-align: center;
+        font-weight: 700;
+        padding-top: 15px;
+    }
+    .fasilitas .section-header p {
+        font-size: 10px;
+    }
+    /* Kegiatan */
+    .kegiatans .header h3 {
+        font-size: 14px;
+        font-weight: 800;
+        color: #186147;
+        /* text-transform: uppercase; */
+    }
+    .kegiatans .header h2 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #3B3B3B;
+    }
+    .kegiatans .header p {
+        font-weight: 300;
+        font-size: 12px;
+        color: #869294;
+        margin-top: 10px
+    }
+    .kegiatans .kegiatan-item {
+        box-shadow: 0px 0 30px rgba(1, 41, 112, 0.08);
+        height: 250px;
+        padding: 20px 30px;
+        text-align: left;
+        transition: 0.3s;
+        border-radius: 16px;
+    }
+    .kegiatans .kegiatan-item h3 {
+        font-size: 18px;
+        font-weight: bold;
+        color: #3B3B3B;
+    }
+    .kegiatans .kegiatan-item h4 {
+        font-size: 12px;
+        color: #999;
+    }
+    .kegiatans .kegiatan-item p {
+        font-size: 10px;
+        color: #979797;
+    }
+    .kegiatans .kegiatan-item .icon {
+        font-size: 10px;
+        padding: 3px 3px;
+        border-radius: 50px;
+        position: relative;
+        margin-bottom: 10px;
+        display: inline-block;
+        transition: 0.3s;
+        background: #1E7C5B;
+    }
+    .kegiatans .kegiatan-item .icon span {
+        font-size: 12px;
+        font-weight: bold;
+        display: block;
+    }
+    /* Footer info  */
+    .footer-top {
+        padding: 10px;
+    }
+    .footer-top .footer-info p {
+        vertical-align: middle;
+        width: 100%;
+        font-size: 12px;
+        line-height: 32px;
+        color: #515151;
+        font-weight: 300;
+        padding: 10px;
+    }
+    /* #web {
+        display: none;
+    }
+    #mobile {
+        display: block;
+        overflow: hidden;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+    } */
+}
