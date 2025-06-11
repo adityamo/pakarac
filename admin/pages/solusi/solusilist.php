@@ -24,7 +24,7 @@ $querySolusi = mysqli_query($koneksi, "SELECT id_solusi, kerusakan, solusi FROM 
                                     <tr class="d-flex">
                                         <td class="col-2">
                                             <a class="badge badge-pill badge-primary" href="ubahSolusi.php?id_solusi=<?php echo $data["id_solusi"]; ?>">edit</a> |
-                                            <a href="function.php?act=hapusSolusi&id_solusi=<?= $data['id_solusi']; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">hapus</a>
+                                            <a href="../function.php?act=hapusSolusi&id_solusi=<?= $data['id_solusi']; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">hapus</a>
                                         </td>
                                         <td class="col-1"><?= $data['id_solusi']; ?></td>
                                         <td class="col-3"><?= $data['penyakit']; ?></td>

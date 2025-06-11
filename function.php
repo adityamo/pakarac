@@ -16,16 +16,16 @@ if (isset($_GET["act"])) {
         registerPakar();
     } else if ($act == "tambahGejala") {
         tambahGejala();
-    } else if ($act == "tambahPenyakit") {
-        tambahPenyakit();
+    } else if ($act == "tambahKerusakan") {
+        tambahKerusakan();
     } else if ($act == "tambahSolusi") {
         tambahSolusi();
     } else if ($act == "hapusGejala") {
         $id_gejala = $_GET["id_gejala"];
         hapusGejala($id_gejala);
-    } else if ($act == "hapusPenyakit") {
-        $id_penyakit = $_GET["id_penyakit"];
-        hapusPenyakit($id_penyakit);
+    } else if ($act == "hapusKerusakan") {
+        $id_penyakit = $_GET["id_kerusakan"];
+        hapusKerusakan($id_penyakit);
     } else if ($act == "hapusPasien") {
         $id_user = $_GET["id_user"];
         hapusPasien($id_user);
@@ -121,7 +121,7 @@ function login()
     $role = $data['role'];
 
     if ($data) {
-
+        $_SESSION['nama'] = $data['nama'];
         if (password_verify($input_pass, $password)) {
             if ($role == "1") {
                 $_SESSION['role'] = 1;
@@ -173,20 +173,21 @@ function tambahGejala()
 }
 
 
-function tambahPenyakit()
+function tambahKerusakan()
 {
     global $koneksi;
-    $penyakit = htmlspecialchars($_POST['namaPenyakit']);
+    $kodeKerusakan = $_POST['kodeKerusakan'];
+    $namaKerusakan = $_POST['namaKerusakan'];
     // $penyakit = $_POST['id_penyakit'];
-    $queryPenyakit = "INSERT INTO penyakit VALUES ('','$penyakit')";
+    $queryKerusakan = "INSERT INTO ms_kerusakan VALUES ('','$kodeKerusakan','$namaKerusakan')";
     // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
-    $exe = mysqli_query($koneksi, $queryPenyakit);
+    $exe = mysqli_query($koneksi, $queryKerusakan);
     if (!$exe) {
         die('Error pada database');
     }
     echo "<script>
-            alert('Penyakit berhasil ditambahkan');
-            document.location.href = 'indexPenyakit.php'</script>";
+            alert('kerusakan berhasil ditambahkan');
+            document.location.href = 'admin/index.php?page=data-kerusakan'</script>";
 }
 
 function tambahSolusi()
@@ -363,23 +364,23 @@ function hapusPakar($id_user)
     }
 }
 
-function hapusPenyakit($id_penyakit)
+function hapusKerusakan($id_kerusakan)
 {
     global $koneksi;
-    mysqli_query($koneksi, "DELETE FROM penyakit WHERE id_penyakit = $id_penyakit");
+    mysqli_query($koneksi, "DELETE FROM ms_kerusakan WHERE id_kerusakan = $id_kerusakan");
     $result = mysqli_affected_rows($koneksi);
     if ($result > 0) {
         echo "
         <script>
                 alert('Penyakit berhasil dihapus!');
-                document.location.href = 'indexPenyakit.php';
+                document.location.href = 'admin/index.php?page=data-kerusakan';
             </script>	
         ";
     } else {
         echo "
         <script>
-                    alert('Penyakit gagal dihapus, karena masih terikat dengan gejala!');
-                    document.location.href = 'indexPenyakit.php';
+                    alert('kerusakan gagal dihapus, karena masih terikat dengan gejala!');
+                    document.location.href = 'admin/index.php?page=data-kerusakan';
             </script>	
         ";
     }

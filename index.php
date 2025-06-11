@@ -108,7 +108,7 @@ include 'function.php';
           <a class="btn btn-primary" href="register.php" role="button">Ayo Mulai!</a>
         </div>
         <div class="col d-none d-sm-block">
-          <img width="500" src="gambar/hero.png" alt="hero" />
+          <img width="500" src="gambar/bg-hero.jpg" alt="hero" />
         </div>
       </div>
     </div>
@@ -117,30 +117,30 @@ include 'function.php';
   <section id="alur">
     <!--Content2-->
     <div id="konten2" class="container konten">
-      <h2 style="font-weight: bold;text-align: center;">Alur Kerja Sistem Pakar Cek Ginjal Yuk!</h2>
+      <h2 style="font-weight: bold;text-align: center;">Alur Kerja Sistem Pakar Air Conditioner!</h2>
       <div class="card-deck">
         <div class="card">
           <h5 class="card-title">Login</h5>
-          <img src="gambar/login.png" class="card-img-top" alt="...">
+          <img src="gambar/step-1.png" class="card-img-top" alt="...">
           <div class="card-body">
 
             <p class="card-text">Pengguna harus melakukan login sebelum melangkah ke tahap selanjutnya, dan jika belum memiliki akun akan diarahkan ke menu registrasi.</p>
           </div>
         </div>
         <div class="card">
-          <h5 class="card-title">Test Gejala Pasien</h5>
-          <img src="gambar/jawab.png" class="card-img-top" alt="...">
+          <h5 class="card-title">Pengetesan</h5>
+          <img src="gambar/step-2.png" class="card-img-top" alt="...">
           <div class="card-body">
-            <p class="card-text">Dalam tahap ini pengguna akan diberikan beberapa pertanyaan terkait dengan gejala yang dialami.</p>
+            <p class="card-text">Dalam tahap ini pengguna akan diberikan beberapa pertanyaan terkait dengan gejala di AC anda</p>
           </div>
         </div>
         <div class="card">
           <h5 class="card-title">Hasil dan Solusi</h5>
-          <img src="gambar/hasil.png" class="card-img-top" alt="...">
+          <img src="gambar/step-3.png" class="card-img-top" alt="...">
 
           <div class="card-body">
 
-            <p class="card-text">Tahap ini merupakan tahap akhir dimana setelah melaksanakan test gejala pengguna akan diberikan hasil test berupa nama penyakit dan solusinya.</p>
+            <p class="card-text">Tahap ini merupakan tahap akhir dimana setelah melaksanakan test gejala ac akan diberikan hasil test berupa hasil kerusakan dan solusinya.</p>
           </div>
         </div>
       </div>

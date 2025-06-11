@@ -1,10 +1,10 @@
 <div class="main-sidebar">
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-      <a href="index.html">Pakar AC</a>
+      <a href="../index.php">Pakar AC</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-      <a href="index.html">PC</a>
+      <a href="../index.php">PC</a>
     </div>
     <ul class="sidebar-menu">
       <li class="menu-header">Data Gejala</li>

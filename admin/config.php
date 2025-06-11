@@ -10,8 +10,16 @@ switch ($page) {
         include "pages/pakar/pakarlist.php";
         break;
 
+    case 'add-pakar':
+        include "pages/pakar/addpakar.php";
+        break;
+
     case 'data-kerusakan';
         include 'pages/kerusakan/kerusakanlist.php';
+        break;
+
+    case 'add-kerusakan';
+        include 'pages/kerusakan/addkerusakan.php';
         break;
 
     case 'data-gejala';

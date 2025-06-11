@@ -23,7 +23,7 @@ $queryGejala = mysqli_query($koneksi, "SELECT * FROM ms_gejala");
                                     <tr>
                                         <td>
                                             <a class="badge badge-pill badge-primary" href="ubahGejala.php?id_gejala=<?php echo $data["id_gejala"]; ?>">edit</a> |
-                                            <a href="function.php?act=hapusGejala&id_gejala=<?= $data['id_gejala']; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">hapus</a>
+                                            <a href="../function.php?act=hapusGejala&id_gejala=<?= $data['id_gejala']; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">hapus</a>
                                         </td>
                                         <td><?= $data['id_gejala']; ?></td>
                                         <td><?= $data['gejala']; ?></td>

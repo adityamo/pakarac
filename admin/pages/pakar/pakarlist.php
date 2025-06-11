@@ -4,7 +4,14 @@ $queryUser = mysqli_query($koneksi, "SELECT * FROM user WHERE role = '2'");
 
 ?>
 <section class="">
-    <h3 class="fs-bold text-md">Pakar List</h3>
+    <div class="d-flex justify-content-between">
+        <h3 class="fs-bold text-md">Pakar List</h3>
+        <div class="">
+            <a href="index.php?page=add-pakar" class="btn btn-md btn-success ">Add Pakar</a>
+        </div>
+
+    </div>
+
     <div class="row pt-2">
         <div class="col-lg-12">
             <div class="card">
@@ -28,7 +35,7 @@ $queryUser = mysqli_query($koneksi, "SELECT * FROM user WHERE role = '2'");
                                     <tr>
                                         <td>
                                             <a class="badge badge-pill badge-primary" href="ubahUser.php?id_user=<?php echo $data["id_user"]; ?>">edit</a> |
-                                            <a href="function.php?act=hapusPasien&id_user=<?= $data["id_user"]; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">hapus</a>
+                                            <a href="../function.php?act=hapusPasien&id_user=<?= $data["id_user"]; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">hapus</a>
                                         </td>
                                         <td><?= $data['nama']; ?></td>
                                         <td><?= $data['email']; ?></td>
