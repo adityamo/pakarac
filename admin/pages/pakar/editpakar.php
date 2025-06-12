@@ -12,9 +12,9 @@ $user = mysqli_fetch_assoc($queryUser);
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <form action="../function.php?act=ubahUser&id_user=<?= $id_user; ?>" id="ubah" method="POST">
+                    <form action="../function.php?act=ubahPakar&id_user=<?= $id_user; ?>" id="ubah" method="POST">
                         <div class="form-group">
-                            <label class="papan" for="nama">Nama</label>
+                            <label class="papan" for="nama">Nama Pakar AC</label>
                             <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" value="<?= $user['nama']; ?>" required>
                             <div class="valid-feedback">
                                 Bagus!

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2025 at 06:53 PM
+-- Generation Time: Jun 12, 2025 at 06:54 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,6 +33,16 @@ CREATE TABLE `aturan` (
   `id_kerusakan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `aturan`
+--
+
+INSERT INTO `aturan` (`id_aturan`, `id_gejala`, `id_kerusakan`) VALUES
+(1, 1, 4),
+(2, 2, 1),
+(3, 3, 2),
+(4, 4, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -50,8 +60,8 @@ CREATE TABLE `ms_gejala` (
 --
 
 INSERT INTO `ms_gejala` (`id_gejala`, `kode_gejala`, `gejala`) VALUES
-(1, 'GJL01', 'AC Mati Total'),
-(2, 'GJL02', 'MCB trip');
+(2, 'GJL01', 'AC mati total'),
+(3, 'BCG0089', 'Sikiring Putus 2');
 
 -- --------------------------------------------------------
 
@@ -73,7 +83,10 @@ INSERT INTO `ms_kerusakan` (`id_kerusakan`, `kode_kerusakan`, `kerusakan`) VALUE
 (1, 'IND01', 'Komponen Utama'),
 (2, 'IND02', 'Komponen Pendukung'),
 (3, 'IND03', 'Komponen Kelistrikan'),
-(4, 'IND04', 'Bahan Pendingin (Refrigerant)');
+(4, 'IND04', 'Bahan Pendingin (Refrigerant)'),
+(7, 'DN99993', 'Fatal error'),
+(8, 'asd', 'asd'),
+(9, '', '');
 
 -- --------------------------------------------------------
 
@@ -86,6 +99,13 @@ CREATE TABLE `solusi` (
   `id_kerusakan` int(11) NOT NULL,
   `solusi` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `solusi`
+--
+
+INSERT INTO `solusi` (`id_solusi`, `id_kerusakan`, `solusi`) VALUES
+(3, 1, 'beli baru');
 
 -- --------------------------------------------------------
 
@@ -108,7 +128,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `role`, `nama`, `email`, `alamat`, `password`) VALUES
 (1, 0, 'admin', 'admin@gmail.com', 'depok', '$2y$10$6dJueoreJPdWr8nKHGdaxOGWq4XbCll5enL6.L6yWRkFettWznL0y'),
-(2, 1, 'rendy aditya', 'rendy@gmail.com', 'kebagusan', '$2y$10$SaKoVvvr4p0CcMRKv06C0O3DMNU5zEuKNhJ./nyjLpmQZ8fmlijFW');
+(9, 2, 'fabio ', 'fabio@gmail.com', 'jakarta', '$2y$10$HTLGTQUttNRABFKe9le4seX8MBzzVEJlYKhvFx7.F4VO65gFnm5iC');
 
 --
 -- Indexes for dumped tables
@@ -118,9 +138,7 @@ INSERT INTO `user` (`id_user`, `role`, `nama`, `email`, `alamat`, `password`) VA
 -- Indexes for table `aturan`
 --
 ALTER TABLE `aturan`
-  ADD PRIMARY KEY (`id_aturan`),
-  ADD KEY `aturan_ibfk_1` (`id_gejala`),
-  ADD KEY `aturan_ibfk_2` (`id_kerusakan`);
+  ADD PRIMARY KEY (`id_aturan`);
 
 --
 -- Indexes for table `ms_gejala`
@@ -155,42 +173,35 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `aturan`
 --
 ALTER TABLE `aturan`
-  MODIFY `id_aturan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_aturan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ms_gejala`
 --
 ALTER TABLE `ms_gejala`
-  MODIFY `id_gejala` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_gejala` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ms_kerusakan`
 --
 ALTER TABLE `ms_kerusakan`
-  MODIFY `id_kerusakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_kerusakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `solusi`
 --
 ALTER TABLE `solusi`
-  MODIFY `id_solusi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_solusi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `aturan`
---
-ALTER TABLE `aturan`
-  ADD CONSTRAINT `aturan_ibfk_1` FOREIGN KEY (`id_gejala`) REFERENCES `ms_gejala` (`id_gejala`),
-  ADD CONSTRAINT `aturan_ibfk_2` FOREIGN KEY (`id_kerusakan`) REFERENCES `ms_kerusakan` (`id_kerusakan`);
 
 --
 -- Constraints for table `solusi`

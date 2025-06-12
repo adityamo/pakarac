@@ -28,7 +28,7 @@ $queryKerusakan  = mysqli_query($koneksi, "SELECT * FROM ms_kerusakan");
                                 <?php while ($data = mysqli_fetch_assoc($queryKerusakan)) { ?>
                                     <tr>
                                         <td>
-                                            <a class="badge badge-pill badge-primary" href="ubahPenyakit.php?id_penyakit=<?php echo $data["id_kerusakan"]; ?>">edit</a> |
+                                            <a class="badge badge-pill badge-primary" href="index.php?page=edit-kerusakan&id_kerusakan=<?php echo $data["id_kerusakan"]; ?>">edit</a> |
                                             <a href="../function.php?act=hapusKerusakan&id_kerusakan=<?= $data['id_kerusakan']; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">hapus</a>
                                         </td>
                                         <td><?= $data['kode_kerusakan']; ?></td>

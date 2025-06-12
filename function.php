@@ -26,9 +26,9 @@ if (isset($_GET["act"])) {
     } else if ($act == "hapusKerusakan") {
         $id_penyakit = $_GET["id_kerusakan"];
         hapusKerusakan($id_penyakit);
-    } else if ($act == "hapusPasien") {
+    } else if ($act == "hapusUser") {
         $id_user = $_GET["id_user"];
-        hapusPasien($id_user);
+        hapusUser($id_user);
     } else if ($act == "hapusPakar") {
         $id_user = $_GET["id_user"];
         hapusPakar($id_user);
@@ -44,9 +44,9 @@ if (isset($_GET["act"])) {
     } else if ($act == "ubahPakar") {
         $id_user = $_GET["id_user"];
         ubahPakar($id_user);
-    } else if ($act == "ubahPenyakit") {
-        $id_penyakit = $_GET["id_penyakit"];
-        ubahPenyakit($id_penyakit);
+    } else if ($act == "ubahKerusakan") {
+        $id_kerusakan = $_GET["id_kerusakan"];
+        ubahKerusakan($id_kerusakan);
     } else if ($act == "ubahSolusi") {
         $id_solusi = $_GET["id_solusi"];
         ubahSolusi($id_solusi);
@@ -84,27 +84,48 @@ function register()
     }
 }
 
-function registerPakar()
+function ubahUser($id_user)
 {
     global $koneksi;
-    $nama = htmlspecialchars($_POST['nama']);
-    $email = htmlspecialchars($_POST['email']);
-    $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
-    $alamat = htmlspecialchars($_POST['alamat']);
-    $tgl_lahir = $_POST['tgl_lahir'];
-    $query_pakar = "INSERT INTO user VALUES ('','2','$nama', '$email', '$alamat', '$tgl_lahir','$password')";
-    $exe = mysqli_query($koneksi, $query_pakar);
-
+    $nama = $_POST['nama'];
+    $email = $_POST['email'];
+    $alamat = $_POST['alamat'];
+    // $penyakit = $_POST['id_penyakit'];
+    $queryUser = "UPDATE user SET nama = '$nama', email = '$email', alamat = '$alamat' WHERE id_user = '$id_user'";
+    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
+    $exe = mysqli_query($koneksi, $queryUser);
     if (!$exe) {
-        die('Query Error : ' . mysqli_errno($koneksi) . '-' . mysqli_error($koneksi));
+        die('Error pada database');
+    }
+    echo "<script>
+            alert('Data User berhasil diubah!');
+            document.location.href = 'admin/index.php?page=data-user'</script>";
+}
+
+function hapusUser($id_user)
+{
+    global $koneksi;
+    mysqli_query($koneksi, "DELETE FROM user WHERE id_user = $id_user");
+    $result = mysqli_affected_rows($koneksi);
+    if ($result > 0) {
+        echo "
+        <script>
+                alert('Akun User berhasil dihapus!');
+                document.location.href = 'admin/index.php?page=data-user';
+            </script>	
+        ";
     } else {
-        // echo "<script type='text/javascript'> success(); </script>";
-        echo "<script>
-        alert('Berhasil Registrasi Pakar! Segera beritahu pakar Login');
-        document.location.href = 'indexPakar.php';
-            </script>";
+        echo "
+        <script>
+                    alert('Akun User gagal dihapus!');
+                    document.location.href = 'admin/index.php?page=data-user';
+            </script>	
+        ";
     }
 }
+
+
+
 
 function login()
 {
@@ -148,124 +169,35 @@ function login()
     }
 }
 
-function tambahGejala()
-{
-    global $koneksi;
-    $gejala = htmlspecialchars($_POST['namaGejala']);
-    $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
-    $queryGejala = "INSERT INTO gejala VALUES ('','$gejala')";
 
-    $exe = mysqli_query($koneksi, $queryGejala);
-
-    if (!$exe) {
-        die('Error pada database');
-    }
-    $id_gejala = mysqli_insert_id($koneksi);
-    $queryRelasi = "INSERT INTO relasi VALUES ('', '$id_gejala', '$id_penyakit')";
-    $ex = mysqli_query($koneksi, $queryRelasi);
-
-    if (!$ex) {
-        die('Error pada database');
-    }
-    echo "<script>
-        alert('Gejala berhasil ditambahkan');
-        document.location.href = 'indexGejala.php'</script>";
-}
-
-
-function tambahKerusakan()
-{
-    global $koneksi;
-    $kodeKerusakan = $_POST['kodeKerusakan'];
-    $namaKerusakan = $_POST['namaKerusakan'];
-    // $penyakit = $_POST['id_penyakit'];
-    $queryKerusakan = "INSERT INTO ms_kerusakan VALUES ('','$kodeKerusakan','$namaKerusakan')";
-    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
-    $exe = mysqli_query($koneksi, $queryKerusakan);
-    if (!$exe) {
-        die('Error pada database');
-    }
-    echo "<script>
-            alert('kerusakan berhasil ditambahkan');
-            document.location.href = 'admin/index.php?page=data-kerusakan'</script>";
-}
-
-function tambahSolusi()
-{
-    global $koneksi;
-    $solusi = htmlspecialchars($_POST['namaSolusi']);
-    $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
-    // $penyakit = $_POST['id_penyakit'];
-    $querySolusi = "INSERT INTO solusi VALUES ('', '$id_penyakit', '$solusi')";
-    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
-    $exe = mysqli_query($koneksi, $querySolusi);
-    if (!$exe) {
-        die('Error pada database');
-    }
-    echo "<script>
-            alert('Solusi berhasil ditambahkan');
-            document.location.href = 'indexSolusi.php'</script>";
-}
-
-function ubahGejala($id_gejala)
-{
-    global $koneksi;
-    $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
-    $gejala = htmlspecialchars($_POST['namaGejala']);
-    $queryGejala = "UPDATE gejala SET gejala = '$gejala' WHERE id_gejala = '$id_gejala'";
-    $exe = mysqli_query($koneksi, $queryGejala);
-    if (!$exe) {
-        die('Error pada database');
-    }
-    $queryRelasi = "UPDATE relasi SET id_gejala = '$id_gejala', id_penyakit = '$id_penyakit' WHERE id_gejala = '$id_gejala'";
-    $ex = mysqli_query($koneksi, $queryRelasi);
-    if (!$ex) {
-        die('Error pada database');
-    }
-    echo "<script>
-        alert('Data Gejala berhasil diubah');
-        document.location.href = 'indexGejala.php'</script>";
-}
-
-function ubahSolusi($id_solusi)
-{
-    global $koneksi;
-    $solusi = htmlspecialchars($_POST['namaSolusi']);
-    $id_penyakit = htmlspecialchars($_POST['id_penyakit']);
-    // $penyakit = $_POST['id_penyakit'];
-    $querySolusi = "UPDATE solusi SET solusi = '$solusi', id_penyakit = '$id_penyakit' WHERE id_solusi = '$id_solusi'";
-    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
-    $exe = mysqli_query($koneksi, $querySolusi);
-    if (!$exe) {
-        die('Error pada database');
-    }
-    echo "<script>
-            alert('Data Solusi berhasil diubah!');
-            document.location.href = 'indexSolusi.php'</script>";
-}
-
-function ubahPenyakit($id_penyakit)
-{
-    global $koneksi;
-    $penyakit = htmlspecialchars($_POST['namaPenyakit']);
-    // $penyakit = $_POST['id_penyakit'];
-    $queryPenyakit = "UPDATE penyakit SET penyakit = '$penyakit' WHERE id_penyakit = '$id_penyakit'";
-    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
-    $exe = mysqli_query($koneksi, $queryPenyakit);
-    if (!$exe) {
-        die('Error pada database');
-    }
-    echo "<script>
-            alert('Data Penyakit berhasil diubah!');
-            document.location.href = 'indexPenyakit.php'</script>";
-}
-
-function ubahUser($id_user)
+function registerPakar()
 {
     global $koneksi;
     $nama = htmlspecialchars($_POST['nama']);
     $email = htmlspecialchars($_POST['email']);
+    $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
     $alamat = htmlspecialchars($_POST['alamat']);
+    $query_pakar = "INSERT INTO user VALUES ('','2','$nama', '$email', '$alamat','$password')";
+    $exe = mysqli_query($koneksi, $query_pakar);
+
+    if (!$exe) {
+        die('Query Error : ' . mysqli_errno($koneksi) . '-' . mysqli_error($koneksi));
+    } else {
+        // echo "<script type='text/javascript'> success(); </script>";
+        echo "<script>
+        alert('Berhasil Registrasi Pakar! Segera beritahu pakar Login');
+        document.location.href = 'admin/index.php?page=data-pakar';
+            </script>";
+    }
+}
+
+function ubahPakar($id_user)
+{
+
+    global $koneksi;
+    $nama = $_POST['nama'];
+    $email = $_POST['email'];
+    $alamat = $_POST['alamat'];
     // $penyakit = $_POST['id_penyakit'];
     $queryUser = "UPDATE user SET nama = '$nama', email = '$email', alamat = '$alamat' WHERE id_user = '$id_user'";
     // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
@@ -274,72 +206,8 @@ function ubahUser($id_user)
         die('Error pada database');
     }
     echo "<script>
-            alert('Data Pasien berhasil diubah!');
-            document.location.href = 'indexAdmin.php'</script>";
-}
-
-function ubahPakar($id_user)
-{
-    global $koneksi;
-    $nama = htmlspecialchars($_POST['nama']);
-    $email = htmlspecialchars($_POST['email']);
-    $alamat = htmlspecialchars($_POST['alamat']);
-    $tgl_lahir = htmlspecialchars($_POST['tgl_lahir']);
-    // $penyakit = $_POST['id_penyakit'];
-    $queryUser = "UPDATE user SET nama = '$nama', email = '$email', alamat = '$alamat', tgl_lahir = '$tgl_lahir' WHERE id_user = '$id_user'";
-    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
-    $exe = mysqli_query($koneksi, $queryUser);
-    if (!$exe) {
-        die('Error pada database');
-    }
-    echo "<script>
             alert('Data Pakar berhasil diubah!');
-            document.location.href = 'indexPakar.php'</script>";
-}
-
-
-function hapusGejala($id_gejala)
-{
-    global $koneksi;
-    mysqli_query($koneksi, "DELETE FROM gejala WHERE id_gejala = $id_gejala");
-    $result = mysqli_affected_rows($koneksi);
-    if ($result > 0) {
-        echo "
-        <script>
-                alert('Gejala berhasil dihapus!');
-                document.location.href = 'indexGejala.php';
-            </script>	
-        ";
-    } else {
-        echo "
-        <script>
-                alert('Gejala gagal dihapus, karena masih terikat dengan penyakit!');
-                document.location.href = 'indexGejala.php';
-            </script>	
-        ";
-    }
-}
-
-function hapusPasien($id_user)
-{
-    global $koneksi;
-    mysqli_query($koneksi, "DELETE FROM user WHERE id_user = $id_user");
-    $result = mysqli_affected_rows($koneksi);
-    if ($result > 0) {
-        echo "
-        <script>
-                alert('Akun Pasien berhasil dihapus!');
-                document.location.href = 'admin/index.php?page=data-user';
-            </script>	
-        ";
-    } else {
-        echo "
-        <script>
-                    alert('Akun Pasien gagal dihapus!');
-                    document.location.href = 'admin/index.php?page=data-user';
-            </script>	
-        ";
-    }
+            document.location.href = 'admin/index.php?page=data-pakar'</script>";
 }
 
 function hapusPakar($id_user)
@@ -364,6 +232,43 @@ function hapusPakar($id_user)
     }
 }
 
+
+
+function tambahKerusakan()
+{
+    global $koneksi;
+    $kodeKerusakan = $_POST['kodeKerusakan'];
+    $namaKerusakan = $_POST['namaKerusakan'];
+    // $penyakit = $_POST['id_penyakit'];
+    $queryKerusakan = "INSERT INTO ms_kerusakan VALUES ('','$kodeKerusakan','$namaKerusakan')";
+    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
+    $exe = mysqli_query($koneksi, $queryKerusakan);
+    if (!$exe) {
+        die('Error pada database');
+    }
+    echo "<script>
+            alert('kerusakan berhasil ditambahkan');
+            document.location.href = 'admin/index.php?page=data-kerusakan'</script>";
+}
+
+function ubahKerusakan($id_kerusakan)
+{
+    global $koneksi;
+    $kodeKerusakan = $_POST['kodeKerusakan'];
+    $kerusakan = $_POST['namaKerusakan'];
+
+
+    $queryPenyakit = "UPDATE ms_kerusakan SET kode_kerusakan = '$kodeKerusakan', kerusakan = '$kerusakan'  WHERE id_kerusakan = '$id_kerusakan'";
+
+    $exe = mysqli_query($koneksi, $queryPenyakit);
+    if (!$exe) {
+        die('Error pada database');
+    }
+    echo "<script>
+            alert('Data Kerusakan berhasil diubah!');
+            document.location.href = 'admin/index.php?page=data-kerusakan'</script>";
+}
+
 function hapusKerusakan($id_kerusakan)
 {
     global $koneksi;
@@ -372,7 +277,7 @@ function hapusKerusakan($id_kerusakan)
     if ($result > 0) {
         echo "
         <script>
-                alert('Penyakit berhasil dihapus!');
+                alert('Kerusakan berhasil dihapus!');
                 document.location.href = 'admin/index.php?page=data-kerusakan';
             </script>	
         ";
@@ -386,6 +291,114 @@ function hapusKerusakan($id_kerusakan)
     }
 }
 
+
+
+function tambahGejala()
+{
+    global $koneksi;
+    $kodeGejala = $_POST['kodeGejala'];
+    $gejala = $_POST['namaGejala'];
+    $id_kerusakan = $_POST['id_kerusakan'];
+    $queryGejala = "INSERT INTO ms_gejala VALUES ('','$kodeGejala','$gejala')";
+
+    $exe = mysqli_query($koneksi, $queryGejala);
+
+    if (!$exe) {
+        die('Error pada database');
+    }
+    $id_gejala = mysqli_insert_id($koneksi);
+    $queryRelasi = "INSERT INTO aturan VALUES ('', '$id_gejala', '$id_kerusakan')";
+    $ex = mysqli_query($koneksi, $queryRelasi);
+
+    if (!$ex) {
+        die('Error pada database');
+    }
+    echo "<script>
+        alert('Gejala berhasil ditambahkan');
+        document.location.href = 'admin/index.php?page=data-gejala'</script>";
+}
+
+
+function ubahGejala($id_gejala)
+{
+    global $koneksi;
+    $id_kerusakan = $_POST['id_kerusakan'];
+    $kodeGejala = $_POST['kodeGejala'];
+    $gejala = $_POST['namaGejala'];
+
+    $queryGejala = "UPDATE ms_gejala SET kode_gejala = '$kodeGejala', gejala = '$gejala' WHERE id_gejala = '$id_gejala'";
+    $exe = mysqli_query($koneksi, $queryGejala);
+    if (!$exe) {
+        die('Error pada database');
+    }
+    $queryRelasi = "UPDATE aturan SET id_gejala = '$id_gejala', id_kerusakan = '$id_kerusakan' WHERE id_gejala = '$id_gejala'";
+    $ex = mysqli_query($koneksi, $queryRelasi);
+    if (!$ex) {
+        die('Error pada database');
+    }
+    echo "<script>
+        alert('Data Gejala berhasil diubah');
+        document.location.href = 'admin/index.php?page=data-gejala'</script>";
+}
+
+function hapusGejala($id_gejala)
+{
+    global $koneksi;
+    mysqli_query($koneksi, "DELETE FROM ms_gejala WHERE id_gejala = $id_gejala");
+    $result = mysqli_affected_rows($koneksi);
+    if ($result > 0) {
+        echo "
+        <script>
+                alert('Gejala berhasil dihapus!');
+                document.location.href = 'admin/index.php?page=data-gejala';
+            </script>	
+        ";
+    } else {
+        echo "
+        <script>
+                alert('Gejala gagal dihapus, karena masih terikat dengan kerusakan!');
+                document.location.href = 'admin/index.php?page=data-gejala';
+            </script>	
+        ";
+    }
+}
+
+function tambahSolusi()
+{
+    global $koneksi;
+    $solusi = $_POST['namaSolusi'];
+    $id_kerusakan = $_POST['id_kerusakan'];
+    // $penyakit = $_POST['id_penyakit'];
+    $querySolusi = "INSERT INTO solusi VALUES ('', '$id_kerusakan', '$solusi')";
+    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
+    $exe = mysqli_query($koneksi, $querySolusi);
+    if (!$exe) {
+        die('Error pada database');
+    }
+    echo "<script>
+            alert('Solusi berhasil ditambahkan');
+            document.location.href = 'admin/index.php?page=data-solusi'</script>";
+}
+
+function ubahSolusi($id_solusi)
+{
+    global $koneksi;
+    $solusi = htmlspecialchars($_POST['namaSolusi']);
+    $id_kerusakan = htmlspecialchars($_POST['id_kerusakan']);
+    // $penyakit = $_POST['id_penyakit'];
+    $querySolusi = "UPDATE solusi SET solusi = '$solusi', id_kerusakan = '$id_kerusakan' WHERE id_solusi = '$id_solusi'";
+    // $queryRelasi = "INSERT INTO relasi VALUES ('', '')"
+    $exe = mysqli_query($koneksi, $querySolusi);
+    if (!$exe) {
+        die('Error pada database');
+    }
+    echo "<script>
+            alert('Data Solusi berhasil diubah!');
+            document.location.href = 'admin/index.php?page=data-solusi'</script>";
+}
+
+
+
 function hapusSolusi($id_solusi)
 {
     global $koneksi;
@@ -395,14 +408,14 @@ function hapusSolusi($id_solusi)
         echo "
         <script>
                 alert('Solusi berhasil dihapus!');
-                document.location.href = 'indexSolusi.php';
+                document.location.href = 'admin/index.php?page=data-solusi';
             </script>	
         ";
     } else {
         echo "
         <script>
                     alert('Solusi gagal dihapus!');
-                    document.location.href = 'indexSolusi.php';
+                    document.location.href = 'admin/index.php?page=data-solusi';
             </script>	
         ";
     }

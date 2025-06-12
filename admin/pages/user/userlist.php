@@ -27,8 +27,8 @@ $queryUser = mysqli_query($koneksi, "SELECT * FROM user WHERE role = '1'");
                                 <?php while ($data = mysqli_fetch_assoc($queryUser)) { ?>
                                     <tr>
                                         <td>
-                                            <a class="badge badge-pill badge-primary" href="ubahUser.php?id_user=<?php echo $data["id_user"]; ?>">edit</a> |
-                                            <a href="../function.php?act=hapusPasien&id_user=<?= $data["id_user"]; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">hapus</a>
+                                            <a class="badge badge-pill badge-primary" href="index.php?page=edit-user&id_user=<?php echo $data['id_user']; ?>">edit</a> |
+                                            <a href="../function.php?act=hapusUser&id_user=<?= $data["id_user"]; ?>" onclick="return confirm('Yakin ingin menghapus data?');" class="badge badge-pill badge-danger">hapus</a>
                                         </td>
                                         <td><?= $data['nama']; ?></td>
                                         <td><?= $data['email']; ?></td>
