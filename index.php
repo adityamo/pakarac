@@ -105,7 +105,7 @@ include 'function.php';
           <p class="mb-4">
             Pakar AC adalah sistem informasi berbasis Web Based yang memanfaatkan teknologi Sistem Pakar didalamnya. Dengan menggunakan sistem pakar ini pengguna dapat mengenali atau memeriksakan keluhan terhadap air conditioner anda hanya dengan menjawab pertanyaan yang diberikan oleh sistem, dan kemudian pengguna dapat melihat hasil Test dengan hasil yang direpresentasikan dalam bentuk persentase.
           </p>
-          <a class="btn btn-primary" href="register.php" role="button">Ayo Mulai!</a>
+          <a class="btn btn-primary" href="function.php?act=pretest" role="button">Ayo Mulai!</a>
         </div>
         <div class="col d-none d-sm-block">
           <img width="500" src="gambar/bg-hero.jpg" alt="hero" />

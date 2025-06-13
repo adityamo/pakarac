@@ -2,11 +2,11 @@
 include 'function.php';
 if (isset($_SESSION['role'])) {
     if ($_SESSION['role'] == 0) {
-        header("location: indexAdmin.php");
+        header("location: admin/index.php");
     } else if ($_SESSION['role'] == 1) {
         header("location: test.php");
     } else if ($_SESSION['role'] == 2) {
-        header("location: indexPakar.php");
+        header("location: admin/index.php");
     }
 }
 
@@ -29,7 +29,7 @@ if (isset($_SESSION['role'])) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-    <title>Cek Ginjal Yuk!</title>
+    <title>PakarAC</title>
 </head>
 
 <body>
@@ -88,15 +88,6 @@ if (isset($_SESSION['role'])) {
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="form-row">
-                    <div class="col">
-                        <label class="papan" for="tgl_lahir">Tanggal Lahir</label>
-                        <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir" required>
-                        <div class="invalid-feedback">
-                            Masukkan Tahun Lahir
-                        </div>
-                    </div>
-                </div> -->
                     <button type="submit" name="submitButton" id="submitButton" class="registerbtn btn btn-primary">Register</button>
                     <br>
                     <div class="container signin">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2025 at 06:54 PM
+-- Generation Time: Jun 13, 2025 at 05:15 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,7 +41,13 @@ INSERT INTO `aturan` (`id_aturan`, `id_gejala`, `id_kerusakan`) VALUES
 (1, 1, 4),
 (2, 2, 1),
 (3, 3, 2),
-(4, 4, 2);
+(4, 4, 2),
+(5, 1, 1),
+(6, 2, 1),
+(7, 3, 1),
+(8, 4, 2),
+(9, 5, 2),
+(10, 6, 2);
 
 -- --------------------------------------------------------
 
@@ -60,8 +66,12 @@ CREATE TABLE `ms_gejala` (
 --
 
 INSERT INTO `ms_gejala` (`id_gejala`, `kode_gejala`, `gejala`) VALUES
-(2, 'GJL01', 'AC mati total'),
-(3, 'BCG0089', 'Sikiring Putus 2');
+(1, 'GJL01', 'AC mati total'),
+(2, 'GJL02', 'MCB Trip'),
+(3, 'GJL03', 'Suara kompresor berdengung dan bergetar keras sebelum AC mati total'),
+(4, 'GJL04', 'LED indikator unit indoor berkedip-kedip'),
+(5, 'GJL05', 'Tidak ada hembusan udara yang keluar dari blower AC'),
+(6, 'GJL06', 'Blower tidak bekerja sama sekali');
 
 -- --------------------------------------------------------
 
@@ -81,12 +91,9 @@ CREATE TABLE `ms_kerusakan` (
 
 INSERT INTO `ms_kerusakan` (`id_kerusakan`, `kode_kerusakan`, `kerusakan`) VALUES
 (1, 'IND01', 'Komponen Utama'),
-(2, 'IND02', 'Komponen Pendukung'),
-(3, 'IND03', 'Komponen Kelistrikan'),
-(4, 'IND04', 'Bahan Pendingin (Refrigerant)'),
-(7, 'DN99993', 'Fatal error'),
-(8, 'asd', 'asd'),
-(9, '', '');
+(2, 'IDN02', 'Komponen Pendukung'),
+(3, 'IDN03', 'Komponen Kelistrikan '),
+(4, 'IDN04 ', 'Bahan Pendingin (Refrigerant)');
 
 -- --------------------------------------------------------
 
@@ -105,7 +112,10 @@ CREATE TABLE `solusi` (
 --
 
 INSERT INTO `solusi` (`id_solusi`, `id_kerusakan`, `solusi`) VALUES
-(3, 1, 'beli baru');
+(1, 1, 'Ganti kompresor dengan yang baru'),
+(2, 2, 'Motor Blower Rusak'),
+(3, 2, 'Bearing kipas outdoor rusak'),
+(4, 4, 'Perbaiki kebocoran pipa dengan cara pengelasan');
 
 -- --------------------------------------------------------
 
@@ -128,7 +138,11 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id_user`, `role`, `nama`, `email`, `alamat`, `password`) VALUES
 (1, 0, 'admin', 'admin@gmail.com', 'depok', '$2y$10$6dJueoreJPdWr8nKHGdaxOGWq4XbCll5enL6.L6yWRkFettWznL0y'),
-(9, 2, 'fabio ', 'fabio@gmail.com', 'jakarta', '$2y$10$HTLGTQUttNRABFKe9le4seX8MBzzVEJlYKhvFx7.F4VO65gFnm5iC');
+(9, 2, 'fabio ', 'fabio@gmail.com', 'jakarta', '$2y$10$HTLGTQUttNRABFKe9le4seX8MBzzVEJlYKhvFx7.F4VO65gFnm5iC'),
+(11, 1, 'stanly karyanto', 'stanly@gmail.com', 'Bekasi', '$2y$10$cdxCPx0TLpmPGOVyo.AZ8O/5en9M0tfvQwLrRIiI6FT65PKabNaTG'),
+(12, 1, 'aditya', 'rfaditya@gmail.com', 'Depok', '$2y$10$U0u9EJtcp8Z8uOe8ONN1D.CbZDh.BaeSkqB/xbSdgMZtjgreET3x6'),
+(13, 1, 'tester', 'tester@gmail.com', 'depok', '$2y$10$1TnfGnkKXd/nYit32nRVDutz6gGW8Jgzp5aHJKxHeOdyK3.XBqLVO'),
+(14, 1, 'user', 'user@gmail.com', 'depok', '$2y$10$z9rwQnHCuvyiMuRzgRDDFe8HT/3Mfqh91YciQwH372P.ir1CbuNm6');
 
 --
 -- Indexes for dumped tables
@@ -173,31 +187,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `aturan`
 --
 ALTER TABLE `aturan`
-  MODIFY `id_aturan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_aturan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ms_gejala`
 --
 ALTER TABLE `ms_gejala`
-  MODIFY `id_gejala` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_gejala` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ms_kerusakan`
 --
 ALTER TABLE `ms_kerusakan`
-  MODIFY `id_kerusakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_kerusakan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `solusi`
 --
 ALTER TABLE `solusi`
-  MODIFY `id_solusi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_solusi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables

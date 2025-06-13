@@ -20,7 +20,7 @@ $queryKerusakan  = mysqli_query($koneksi, "SELECT * FROM ms_kerusakan");
                             <thead>
                                 <tr>
                                     <th>Aksi</th>
-                                    <th>Id Kerusakan</th>
+                                    <th>Kode Kerusakan</th>
                                     <th>Nama Kerusakan</th>
                                 </tr>
                             </thead>

@@ -12,6 +12,8 @@ if (isset($_GET["act"])) {
         register();
     } else if ($act == "login") {
         login();
+    } else if ($act === "pretest") {
+        preTest();
     } else if ($act == "registerPakar") {
         registerPakar();
     } else if ($act == "tambahGejala") {
@@ -57,18 +59,31 @@ if (isset($_GET["act"])) {
 
 function ulang()
 {
-    session_unset();
-    session_destroy();
-    header("location: test.php");
+    // Mulai session (jika belum dimulai)
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // Hapus hanya session yang berkaitan dengan pengecekan
+    unset($_SESSION['persentase']);
+    unset($_SESSION['index_gejala']);
+    unset($_SESSION['hasil']);
+
+    // Redirect kembali ke halaman test
+    header("Location: test.php");
+    exit;
+    // session_unset();
+    // session_destroy();
+    // header("location: test.php");
 }
 
 function register()
 {
     global $koneksi;
-    $nama = htmlspecialchars($_POST['nama']);
-    $email = htmlspecialchars($_POST['email']);
-    $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
-    $alamat = htmlspecialchars($_POST['alamat']);
+    $nama = $_POST['nama'];
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $alamat = $_POST['alamat'];
     // $tgl_lahir = $_POST['tgl_lahir'];
     $query_user = "INSERT INTO user VALUES ('','1','$nama', '$email', '$alamat','$password')";
     $exe = mysqli_query($koneksi, $query_user);
@@ -124,50 +139,58 @@ function hapusUser($id_user)
     }
 }
 
+function preTest()
+{
 
+    session_start();
+
+    if (isset($_SESSION['nama'])) {
+        header("Location: test.php");
+    } else {
+        header("Location: register.php");
+    }
+    exit;
+}
 
 
 function login()
 {
     global $koneksi;
-    $nama = htmlspecialchars($_POST["nama"]);
-    $input_pass = htmlspecialchars($_POST['password']);
-    // var_dump($nama, $input_pass);
-    $query = mysqli_query($koneksi, "SELECT * FROM user where nama = '$nama'");
-    $data = mysqli_fetch_assoc($query);
-    // echo json_encode($data);
-    // die;
 
-    $password = $data['password'];
-    $role = $data['role'];
+    $nama = $_POST["nama"];
+    $input_pass = $_POST['password'];
+
+    $query = mysqli_query($koneksi, "SELECT * FROM user WHERE nama = '$nama'");
+    $data = mysqli_fetch_assoc($query);
 
     if ($data) {
-        $_SESSION['nama'] = $data['nama'];
+        // echo json_encode($data);
+        // die;
+        $password = $data['password'];
+        $role = $data['role'];
+
         if (password_verify($input_pass, $password)) {
+            $_SESSION['nama'] = $data['nama'];
+            $_SESSION['role'] = $role;
+
             if ($role == "1") {
-                $_SESSION['role'] = 1;
-                echo "<script>
-                document.location.href = 'admin/index.php?page=data-user';
-                </script>";
-            } else if ($role == "0") {
-                $_SESSION['role'] = 0;
-                echo "<script>
-                document.location.href = 'admin/index.php?page=data-user';
-                </script>";
-            } else if ($role == "2") {
-                $_SESSION['role'] = 2;
-                echo "<script>
-                document.location.href = 'admin/index.php?page=data-user';
-                </script>";
+                echo "<script>document.location.href = 'test.php';</script>";
+            } else {
+                echo "<script>document.location.href = 'admin/index.php?page=data-user';</script>";
             }
+        } else {
+            session_unset();
+            session_destroy();
+            echo "<script>alert('Password salah!'); window.location.href = 'index.php';</script>";
         }
     } else {
-        echo "<script>
-                alert('Username atau password kosong/salah!');
-                document.location.href = 'index.php';
-                </script>";
+        echo "<script>alert('Username tidak ditemukan!'); window.location.href = 'index.php';</script>";
+        session_unset();
+        session_destroy();
     }
 }
+
+
 
 
 function registerPakar()
@@ -421,10 +444,10 @@ function hapusSolusi($id_solusi)
     }
 }
 
-function gejala($id_penyakit)
+function gejala($id_kerusakan)
 {
     global $koneksi;
-    $query = "SELECT relasi.id_gejala as id_gejala FROM relasi INNER JOIN gejala ON relasi.id_gejala = gejala.id_gejala INNER JOIN penyakit ON relasi.id_penyakit = penyakit.id_penyakit WHERE relasi.id_penyakit = '$id_penyakit' ";
+    $query = "SELECT aturan.id_gejala as id_gejala FROM aturan INNER JOIN ms_gejala ON aturan.id_gejala = ms_gejala.id_gejala INNER JOIN ms_kerusakan ON aturan.id_kerusakan = ms_kerusakan.id_kerusakan WHERE aturan.id_kerusakan = '$id_kerusakan' ";
     $data = mysqli_query($koneksi, $query);
     // var_dump($data);
     $row = mysqli_fetch_assoc($data);

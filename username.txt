@@ -1,11 +1,4 @@
-Pasien
-Username = adi
-Password = adi12345
-
-Pakar
-Username = Dokter Budi
-Password = budi12345
 
 Admin
 Username = admin
-Password = admin12345
+Password = 12345678
